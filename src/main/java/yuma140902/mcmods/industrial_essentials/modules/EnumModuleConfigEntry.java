@@ -4,7 +4,9 @@ import javax.annotation.Nullable;
 
 public enum EnumModuleConfigEntry {
 	Tools,
-	BasicMachines;
+	BasicMachines,
+	Resources,
+	;
 	
 	@Nullable
 	private String _comment = null;
