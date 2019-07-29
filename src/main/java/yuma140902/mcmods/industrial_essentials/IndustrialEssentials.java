@@ -10,6 +10,7 @@ import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import yuma140902.mcmods.industrial_essentials.config.ModConfigCore;
+import yuma140902.mcmods.industrial_essentials.modules.Modules;
 import yuma140902.mcmods.industrial_essentials.proxy.CommonProxy;
 import yuma140902.mcmods.yumalib.YumaLib;
 import yuma140902.mcmods.yumalib.YumaLibApi;
@@ -67,6 +68,9 @@ public class IndustrialEssentials {
 		
 		YumaLibApi.registerUpdateChecker(updateChecker);
 		
+		Modules.initModules();
+		Modules.onPreInit(event);
+		
 		//ModBlocks.register();
 		//ModItems.register();
 		
@@ -78,6 +82,9 @@ public class IndustrialEssentials {
 	@EventHandler
 	public void init(FMLInitializationEvent event) {
 		LOGGER.info("init");
+		
+		Modules.onInit(event);
+		
 		//Recipes.register();
 		
 		//proxy.registerEntities();
@@ -92,6 +99,9 @@ public class IndustrialEssentials {
 	@EventHandler
 	public void postInit(FMLPostInitializationEvent event) {
 		LOGGER.info("postInit");
+		
+		Modules.onPostInit(event);
+		
 		//Plugins.tweakModsPost();
 		//Plugins.logPluginStats();
 	}

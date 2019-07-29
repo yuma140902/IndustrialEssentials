@@ -1,12 +1,14 @@
 package yuma140902.mcmods.industrial_essentials.config;
 
 import java.util.ArrayList;
+import javax.annotation.Nonnull;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.common.config.Property;
 import yuma140902.mcmods.industrial_essentials.IndustrialEssentials;
+import yuma140902.mcmods.industrial_essentials.modules.Modules;
 import yuma140902.mcmods.yumalib.updatecheck.EnumUpdateChannel;
 
 public class ModConfigCore {
@@ -49,6 +51,8 @@ public class ModConfigCore {
 		cfg.addCustomCategoryComment(CATEGORY_GENERAL, "Settings of IndustrialEssentials");
 		cfg.setCategoryLanguageKey(CATEGORY_GENERAL, CONFIG_CATEGORY_LANGKEY + "general");
 		cfg.setCategoryRequiresMcRestart(CATEGORY_GENERAL, true);
+		
+		Modules.initConfig(cfg);
 	}
 	
 	public static void syncConfig() {
@@ -77,6 +81,7 @@ public class ModConfigCore {
 		
 		cfg.getCategory(CATEGORY_GENERAL).setPropertyOrder(order);
 		
+		Modules.syncConfig(cfg);
 		
 		cfg.save();
 	}
@@ -84,14 +89,17 @@ public class ModConfigCore {
 	private static void wrapConfig() {
 	}
 	
+	@Nonnull
 	public static String getSubCategory(String subCategory) {
 		return CATEGORY_GENERAL + "." + subCategory;
 	}
 	
+	@Nonnull
 	public static String getCategoryLangkey(String key) {
 		return CONFIG_CATEGORY_LANGKEY + key;
 	}
 	
+	@Nonnull
 	public static String getPropertyLangkey(String key) {
 		return CONFIG_PROP_LANGKEY + key;
 	}
